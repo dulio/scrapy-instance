@@ -7,13 +7,13 @@ from douban_movie.items import DoubanMovieItem
 class MoiveSpider(CrawlSpider):
   name="douban_movie"
   allowed_domains=["movie.douban.com"]
-  url=r'http://movie.douban.com/tag/%E5%96%9C%E5%89%A7'
+  url=r'http://movie.douban.com/tag/'
   start_urls=[url]
   rules=[
-    Rule(SgmlLinkExtractor(allow=(url+r'\?start=\d+.*'))),
-    Rule(SgmlLinkExtractor(allow=(r'http://movie.douban.com/subject/\d+')),callback="parse_item"),	  
+    Rule(SgmlLinkExtractor(allow=(url+r'[\u4e00-\u9fa5]+',))),
+    Rule(SgmlLinkExtractor(allow=(url+r'.+\?start=\d+.*',))),
+    Rule(SgmlLinkExtractor(allow=(r'http://movie.douban.com/subject/\d+',)),callback="parse_item"),
   ]
-  print (url+r'\?start=\d+.*')
 
   def parse_item(self,response):
     sel=Selector(response)
