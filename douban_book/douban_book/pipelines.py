@@ -27,7 +27,7 @@ class DoubanBookPipeline(object):
     tx.execute("select * from douban_book where name= %s",(item['name'][0],))
     result=tx.fetchone()
     log.msg(result,level=log.DEBUG)
-    print item
+    #print item
     if result:
       log.msg("Item already stored in db:%s" % item,level=log.DEBUG)
       print '[FAIED] book [%s] existed.' % (item['name'][0])
