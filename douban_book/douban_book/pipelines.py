@@ -27,7 +27,7 @@ class DoubanBookPipeline(object):
     tx.execute("select * from douban_book where name= %s",(item['name'][0],))
     result=tx.fetchone()
     log.msg(result,level=log.DEBUG)
-    #print result
+    print item
     if result:
       log.msg("Item already stored in db:%s" % item,level=log.DEBUG)
       print '[FAIED] book [%s] existed.' % (item['name'][0])
@@ -36,17 +36,10 @@ class DoubanBookPipeline(object):
       desc=author_desc=origin_name=date=isbn=author=''
       gmt=time.time()
       
-      # descriptions
-      if item['author_description_hidden']:
-        item['author_description']=item['author_description_hidden']
       if item['description_hidden']:
         item['description']=item['description_hidden']
-      
-      lenAuthorDesc=len(item['author_description'])
-      for n in xrange(lenAuthorDesc):
-        desc+=item['author_description'][n].strip()
-        if n<lenAuthorDesc-1:
-          author_desc+='\n'
+      if not item['description']:
+        item['description']=item['description2']
       lenDesc=len(item['description'])
       for n in xrange(lenDesc):
         desc+=item['description'][n].strip()

@@ -13,7 +13,7 @@ class DoubanBookItem(scrapy.Item):
     score = scrapy.Field()
     author = scrapy.Field()
     info = scrapy.Field()
-    author_description = scrapy.Field()
-    author_description_hidden = scrapy.Field()  #隐藏内容
     description = scrapy.Field()  # 内容
     description_hidden = scrapy.Field()  #隐藏内容
+    description2 = scrapy.Field()  # 内容
+    description_hidden2 = scrapy.Field()  #隐藏内容
